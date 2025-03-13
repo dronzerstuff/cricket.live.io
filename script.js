@@ -20,10 +20,10 @@ async function fetchMatches() {
 function loadMatchItems(matches) {
   matchListElement.innerHTML = ""; // Clear existing items
   matches.forEach((match) => {
-    if (match.status === "LIVE") {
+    if (match.status === "LIVE" && match.adfree_url) {
       const li = document.createElement("li");
       li.textContent = match.title;
-      li.onclick = () => openVideoPlayer(match.dai_url);
+      li.onclick = () => openVideoPlayer(match.adfree_url);
       matchListElement.appendChild(li);
     }
   });
