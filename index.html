@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Live Matches</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://cdn.tutorialjinni.com/hls.js/1.2.1/hls.min.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Live Matches</h1>
+      <ul id="matchList">
+        <!-- Match items will be dynamically loaded here -->
+      </ul>
+    </div>
+
+    <div id="videoPlayerModal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2 id="videoTitle"></h2>
+        <video
+          id="videoPlayer"
+          class="video-js vjs-fluid vjs-default-skin"
+          controls
+          preload="auto"
+          autoplay
+        >
+          <source
+            id="videoSource"
+            src="https://dai.google.com/linear/hls/event/_sesV8QHRmKh2n9gF1n4jw/master.m3u8"
+            type="application/x-mpegURL"
+          />
+          Your browser does not support the video tag.
+        </video>
+        <div class="video-info">
+          <p id="videoStatus"></p>
+        </div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
