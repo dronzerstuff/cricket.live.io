@@ -20,10 +20,18 @@ async function fetchMatches() {
 function loadMatchItems(matches) {
   matchListElement.innerHTML = ""; // Clear existing items
   matches.forEach((match) => {
-    if (match.status === "LIVE" && match.adfree_url) {
+    if (match.status === "LIVE" && match.dai_url) {
       const li = document.createElement("li");
-      li.textContent = match.title;
-      li.onclick = () => openVideoPlayer(match.adfree_url);
+      const img = document.createElement("img");
+      img.src = match.src;
+      img.alt = match.title;
+      li.appendChild(img); // Append the image to the list item
+
+      const title = document.createElement("h3");
+      title.textContent = match.title; // Set the title text
+      li.appendChild(title); // Append the title to the list item
+
+      li.onclick = () => openVideoPlayer(match.dai_url);
       matchListElement.appendChild(li);
     }
   });
@@ -36,6 +44,7 @@ function openVideoPlayer(src) {
   hls.loadSource(src);
   hls.attachMedia(video);
   videoPlayerModal.style.display = "block";
+  
 }
 
 // Close modal
@@ -43,7 +52,6 @@ closeModal.onclick = () => {
   videoPlayerModal.style.display = "none";
   videoPlayer.pause();
 };
-
 
 // Close modal when clicking outside of it
 window.onclick = (event) => {
