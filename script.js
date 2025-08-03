@@ -7,10 +7,11 @@ const closeModal = document.querySelector(".close");
 async function fetchMatches() {
   try {
     const response = await fetch(
-      "https://raw.githubusercontent.com/drmlive/fancode-live-events/refs/heads/main/fancode.json"
+      "https://raw.githubusercontent.com/dronzerstuff/LiveStream/refs/heads/main/output.json"
+     // "https://raw.githubusercontent.com/drmlive/fancode-live-events/refs/heads/main/fancode.json"
     );
     const data = await response.json();
-    loadMatchItems(data.matches);
+    loadMatchItems(data);
   } catch (error) {
     console.error("Error fetching matches:", error);
   }
@@ -20,10 +21,9 @@ async function fetchMatches() {
 function loadMatchItems(matches) {
   matchListElement.innerHTML = ""; // Clear existing items
   matches.forEach((match) => {
-    if (match.status === "LIVE" && match.dai_url) {
       const li = document.createElement("li");
       const img = document.createElement("img");
-      img.src = match.src;
+      img.src = match.image;
       img.alt = match.title;
       li.appendChild(img); // Append the image to the list item
 
@@ -31,9 +31,10 @@ function loadMatchItems(matches) {
       title.textContent = match.title; // Set the title text
       li.appendChild(title); // Append the title to the list item
 
-      li.onclick = () => openVideoPlayer(match.dai_url);
+      // li.onclick = () => openVideoPlayer(match.link);
+      li.onclick = () => window.open(match.link, '_blank');
       matchListElement.appendChild(li);
-    }
+    
   });
 }
 
